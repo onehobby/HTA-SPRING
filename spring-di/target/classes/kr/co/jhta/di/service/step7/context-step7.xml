@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        <!-- 객체생성 -->
+        <bean id="userServiceImpl" class="kr.co.jhta.di.service.step7.UserServiceImpl"></bean>
+        
+        <!-- 객체생성해서 객체의 멤버변수가 있다면 값을 주입 -->
+        <bean id="smsMessageSender" class="kr.co.jhta.di.service.SmsMessageSender">
+        	<property name="telecom" value="SKT"></property>
+        </bean>
+        
+        
+        <bean id="eventNotificationServiceImpl" class="kr.co.jhta.di.service.step7.EventNotificationServiceImpl">
+        	<property name="userService" ref="userServiceImpl"></property>
+        	<property name="messageSender" ref="smsMessageSender"></property>
+        </bean>
+        
+</beans>

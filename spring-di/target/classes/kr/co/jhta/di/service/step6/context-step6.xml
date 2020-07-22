@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- "kr.co.jhta.di.service.PdfOutput"위치에있는 클래스를 기반으로 pdfOutput이라는 이름으로 객체를 만들어라  -->    
+	<bean id="pdfOutput" class="kr.co.jhta.di.service.PdfOutput"></bean>
+	
+	<!-- FileOutput객체  -->
+	<bean id="fileOutput" class="kr.co.jhta.di.service.FileOutput">
+		<!-- 
+			생성된 객체의 필드에 정수, 실수, 불린, 문자열을 등의 값을 주입하는 경우에는
+			value="값" 속성을 사용해서 값을 주입한다.
+		 -->
+		<property name="directory" value="c:/temp"></property>
+		<property name="filename" value="step5.txt"></property>
+	</bean>
+	
+	<!-- "kr.co.jhta.di.service.step6.Reporter"위치에 있는 클래스를 기반으로 reporter이라는 이름으로 객체를 만들어라  -->
+	<bean id="reporter" class="kr.co.jhta.di.service.step6.Reporter">
+		<!--
+			 생성된 reporter객체의 output이라는 멤버변수에 pdfOutput이라는 객체를 참조되는 객체를 찾아서 연결지어라
+			 생성된 객체의 필드에 스프링 컨테이너 내에 존재하는 다른 객체를 주입하는 경우에는
+			 ref="빈의 아이디" 속성을 사용해서 값을 주입한다.
+		 -->
+		<property name="output" ref="pdfOutput"></property>
+	</bean>
+	
+	
+	
+</beans>
+
