@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 알맞은 annotation을 알아서 등록해 줌 -->
+	<context:annotation-config></context:annotation-config>
+	
+	<!-- 
+		지정된 패키지 및 그 하위 패키지에서 @Component, @Controller, @ControllerAdvice, @RestController,
+		@Service, @Repository 등의 Annotation이 부착된 모든 클래스를 검색해서 자동으로 스프링 컨테이너가
+		객체를 생성한다.
+	 -->
+	<context:component-scan base-package="kr.co.jhta.di"></context:component-scan>
+	
+	<!-- 
+		- 기본자료형 설정
+		1. 설정정보를 저장 할 spring.properties파일을 생성하고 클래스안의 변수에대한 값을 key,value의 형태로 설정한다.
+		2. xml파일의 context:property-placeholder 태그의 location을 이용하여 properties설정파일의 위치를 지정해준다
+		3. 해당하는 클래스의 주입할 변수의 값을 @Value()의 Annotation을 이용해서 @Value("${}")의 형태로 주입한다.
+	
+	
+		location으로 지정된 경로의 spring.properties파일을 전부 읽어와서(모든 properties파일을 읽어옴)
+		파일의 내용을 key와 value로 구분해서 그 정보를 가지고 있는 객체를 스프링컨테이너가 생성한다.
+		그 정보는 아래와 같이 사용된다.
+		
+		* 객체 생성을 수동으로 하는 경우
+		<bean class="x.y.z.SmsMessageSender">
+			<property name="company" value="${message.sender.sms.company}" />
+		</bean>  
+		
+		* 객체 생성을 자동으로 하는 경우
+		@Component
+		public class SmsMessageSender implements MessageSender {
+			@Value("${message.sender.sms.company}") ==> spring.properties의 설정된 값을 가져온다.
+			private String company;
+		}
+	 -->
+	<context:property-placeholder location="classpath:/config/spring.properties"/>
+	
+</beans>
