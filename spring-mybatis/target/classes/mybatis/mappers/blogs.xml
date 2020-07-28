@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.jhta.dao.BlogDao">
+
+	<!-- mybatis-config의 <typeAliases>설정으로 parameterType을 별칭으로 지정할 수 있다. -->
+	
+	<select id="getBlogByNo" parameterType="int" resultType="Blog">
+	
+		select
+			b.blog_no 				as no, 
+			b.blog_title 			as title, 
+			b.blog_writer			as "writer.id",    	-- User객체의 id에 값이 저장 
+			a.user_name				as "writer.name",	-- User객체의 name에 값이 저장	
+			a.user_email			as "writer.email",	-- User객체의 email에 값이 저장
+			b.blog_likes 			as likes, 
+			b.blog_content 			as content,
+			b.blog_comment_counts 	as commentCounts, 
+			b.blog_create_date 		as createDate
+		from 
+			spring_users a, spring_blogs b
+		where 
+			a.user_id = b.blog_writer
+			and blog_no = #{value}
+	
+	</select>
+	
+	<select id="getAllBlogs" resultType="Blog">
+		select
+			b.blog_no				as no,
+			b.blog_title			as title,
+			b.blog_writer			as "writer.id",
+			a.user_name				as "writer.name",
+			a.user_email			as "writer.email",
+			b.blog_likes			as likes,
+			b.blog_content			as content,
+			b.blog_comment_counts	as commentCounts,
+			b.blog_create_date		as createDate
+		from
+			spring_users a, spring_blogs b
+		where
+			a.user_id = b.blog_writer
+	</select>
+	
+	<select id="getBlogsByWriter" parameterType="string" resultType="Blog">
+		select
+			b.blog_no				as no,
+			b.blog_title			as title,
+			b.blog_writer			as "writer.id",
+			a.user_name				as "writer.name",
+			a.user_email			as "writer.email",
+			b.blog_likes			as likes,
+			b.blog_content			as content,
+			b.blog_comment_counts	as commentCounts,
+			b.blog_create_date		as createDate
+		from
+			spring_users a, spring_blogs b
+		where
+			a.user_id = b.blog_writer
+			and a.user_id like '%' || #{value} || '%'		
+	</select>
+	
+	<insert id="insertBlog" parameterType="Blog">
+		insert into spring_blogs
+		(blog_no, blog_title, blog_writer, blog_content)
+		values
+		(spring_blog_seq.nextval, #{title}, #{writer.id}, #{content})
+		<!--
+			매개변수로 객체를 전달해주고 객체안의 값을 전달해줄때의 동작방식
+			#{writer.id} : blog.getWriter().getId();
+		-->
+	</insert>
+	
+	<update id="updateBlog" parameterType="Blog">
+		update spring_blogs
+		set
+		blog_title = #{blog.title}
+		blog_content = #{blog.content}
+		where blog_no = #{blog.no}
+	</update>
+	
+	<delete id="deleteBlog" parameterMap="string">
+		delete from spring_blogs where blog_no = #{value}
+	</delete>
+	
+
+</mapper>

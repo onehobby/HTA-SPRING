@@ -10,16 +10,28 @@ public class BlogDto {
 	private int likes;
 	private int commentCounts;
 	private Date blogCreateDate;
+	private String content;
 	
 	public BlogDto() {}
 
-	public BlogDto(int no, String title, String writer, int likes, int commentCounts, Date blogCreateDate) {
+	public BlogDto(int no, String title, String writer, int likes, int commentCounts, Date blogCreateDate,
+			String content) {
+		super();
 		this.no = no;
 		this.title = title;
 		this.writer = writer;
 		this.likes = likes;
 		this.commentCounts = commentCounts;
 		this.blogCreateDate = blogCreateDate;
+		this.content = content;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getNo() {

@@ -4,10 +4,10 @@
 
 	<select id="getUserById" parameterType="string" resultType="kr.co.jhta.vo.User">
 		select
-			user_id				as id;
-			user_name			as name;
-			user_password		as password;
-			user_email			as email;
+			user_id				as id,
+			user_name			as name,
+			user_password		as password,
+			user_email			as email,
 			user_created_date	as createDate
 		from
 			spring_users
