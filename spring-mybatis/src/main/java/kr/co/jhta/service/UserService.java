@@ -1,10 +1,16 @@
 package kr.co.jhta.service;
 
+import java.util.List;
+
+import kr.co.jhta.vo.Blog;
+import kr.co.jhta.vo.Comment;
 import kr.co.jhta.vo.User;
 
 /**
  *  사용자에게 제공되는 서비스를 정의하는 인터페이스
  *  interface에 스펙(기능)을 정의한다.
+ *  신규가입, 로그인, 내가 작성한 게시글 조회, 내가 작성한 댓글 조회, 내 정보 변경, 계정삭제 서비스,
+ *  댓글추가, 댓글삭제서비스를 정의한다.
  * @author JHTA
  *
  */
@@ -25,6 +31,15 @@ public interface UserService {
 	 */
 	User login(String id, String password);
 	
+	List<Blog> getMyBlogs(String userId);
 	
+	List<Comment> getMyComments(String userId);
+	
+	void deleteAllMyBlogs(String userId);
+	
+	void updateUserInfo(User user);
+	
+	void deleteMyAccount(String userId);
+
 
 }

@@ -63,7 +63,8 @@
 			User getUserById(String userId)에 대응되는 SQL 구문
 	 -->
 	
-	<select id="getUserByName" parameterType="string" resultType="User">
+	<select id="getUserByName" parameterType="string" resultType="User"
+	>
 		select
 			user_id as id,
 			user_name as name,
@@ -83,9 +84,9 @@
 	 -->
 	<insert id="insertUser" parameterType="User">
 		insert into spring_users
-		(user_id, user_name, user_password, user_email, user_created_date)
+		(user_id, user_name, user_password, user_email)
 		values
-		(#{id}, #{name}, #{password}, #{email}, sysdate)
+		(#{id}, #{name}, #{password}, #{email})
 	</insert>
 	
 	<!-- 

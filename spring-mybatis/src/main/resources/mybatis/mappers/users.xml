@@ -73,7 +73,8 @@
 		from
 			spring_users
 		where
-			user_name like '%' || #{value} || '%'
+			user_name = #{value}
+		order by user_name asc
 	</select>
 	
 	<!-- 
@@ -82,9 +83,9 @@
 	 -->
 	<insert id="insertUser" parameterType="User">
 		insert into spring_users
-		(user_id, user_name, user_password, user_email)
+		(user_id, user_name, user_password, user_email, user_created_date)
 		values
-		(#{id}, #{name}, #{password}, #{email})
+		(#{id}, #{name}, #{password}, #{email}, sysdate)
 	</insert>
 	
 	<!-- 
@@ -98,10 +99,10 @@
 	<update id="updateUser" parameterType="User">
 		update spring_users
 		set
-			user_password = #{user.password},
-			user_email = #{user.email}
+			user_password = #{password},
+			user_email = #{email}
 		where
-			user_id = #{user.id}
+			user_id = #{id}
 	</update>
 	
 	

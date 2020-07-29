@@ -56,7 +56,9 @@
 			spring_users a, spring_blogs b
 		where
 			a.user_id = b.blog_writer
-			and a.user_id like '%' || #{value} || '%'		
+			and b.blog_writer like '%' || #{value} || '%'
+		order by 
+			b.blog_no		
 	</select>
 	
 	<insert id="insertBlog" parameterType="Blog">
@@ -73,13 +75,19 @@
 	<update id="updateBlog" parameterType="Blog">
 		update spring_blogs
 		set
-		blog_title = #{blog.title}
-		blog_content = #{blog.content}
-		where blog_no = #{blog.no}
+			blog_title = #{title},
+			blog_content = #{content},
+			blog_likes = #{likes},
+			blog_comment_counts = #{commentCounts}
+		where blog_no = #{no}
 	</update>
 	
-	<delete id="deleteBlog" parameterMap="string">
+	<delete id="deleteBlogByNo" parameterType="int">
 		delete from spring_blogs where blog_no = #{value}
+	</delete>
+	
+	<delete id="deleteBlogByWriter" parameterType="string">
+		delete from spring_blogs where blog_writer = #{value}
 	</delete>
 	
 
