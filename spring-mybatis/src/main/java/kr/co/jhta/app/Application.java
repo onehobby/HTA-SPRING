@@ -20,7 +20,7 @@ public class Application {
 		// public class UserServiceImpl implements UserService() { ... }
 		UserService userService = ctx.getBean(UserService.class);
 		
-		userService.addNewUser(new User("hong6", "홍길동", "zxcv1234", "hong@gmail.com"));
+		userService.addNewUser(new User("hong7", "홍길동", "zxcv1234", "hong@gmail.com"));
 		
 	}
 }
