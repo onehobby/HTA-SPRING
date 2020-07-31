@@ -44,7 +44,6 @@
 	 <!--
 	 	업무로직이 구현된 xxxServiceImpl 스프링 빈으로 등록하고, 조립시키기
 	 -->
-	 
 	 <context:annotation-config />
 	 <context:component-scan base-package="kr.co.jhta.service" />
 	 

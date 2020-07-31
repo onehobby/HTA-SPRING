@@ -43,9 +43,9 @@
 		
 		<insert id="insertBoard" parameterType="Board">
 			insert into spring_free_boards
-			(board_no, board_title, board_writer, board_password, board_content, board_filename, board_likes, board_deleted, board_created_date, board_updated_date)
+			(board_no, board_title, board_writer, board_password, board_content, board_filename, board_likes, board_created_date, board_updated_date)
 			values
-			(spring_board_seq.nextval, #{title}, #{writer}, #{password}, #{content}, #{filename}, #{likes}, #{deleted}, sysdate, sysdate)
+			(spring_board_seq.nextval, #{title}, #{writer}, #{password}, #{content}, #{filename}, #{likes}, sysdate, sysdate)
 		</insert>
 		
 		<update id="updateBoard" parameterType="Board">
